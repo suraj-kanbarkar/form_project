@@ -17,7 +17,7 @@ SECRET_KEY = 'kmw2noodj(nsj4e-o2d2p79-q%qq!&f*v!94mji=w-3ze6gyd3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '*']
+ALLOWED_HOSTS = ['https://form-appli.herokuapp.com/']
 
 
 # Application definition
@@ -124,7 +124,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/static_files')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 
 STATICFILES_DIRS = [
     STATIC_DIR,

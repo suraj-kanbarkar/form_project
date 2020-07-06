@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Havi</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>-->
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />-->
+
+</head>
+<style>
+    .errorlist {
+      color:red;
+    }
+</style>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light dropdown">
+            <form class="form-inline my-2 my-lg-0 align-self-end ml-auto">
+                <p style="margin-top: 20px; margin-right: 20px;" id="name"> </p>
+                <a class="btn btn-outline-danger" type="submit" href="{% url 'signin' %}" id="logout" >Logout</a>
+            </form>
+        </nav>
+        <div class="container p-3 my-4 border">
+            {% if form %}
+            <form class="form" method="POST" action="{% url 'form_details' %}" id="form" enctype="multipart/form-data">{% csrf_token %}
+                <p> Please enter your details </p>
+                <p id="status" style="color:red;"> {{ status }} </p>
+                {{ form.as_p }}
+                <input class="btn btn-success" type="submit" value="Submit">
+            </form>
+            {% elif status %}
+                {{ status }}
+            {% endif %}
+        </div>
+    </div>
+</body>
+<script>
+    var user = localStorage.getItem('user');
+    document.getElementById('name').innerText = "Welcome " + user;
+    img = document.getElementById('id_image').value;
+
+    function thumbnail(){
+        var preview = document.querySelector('img');
+          var file    = document.querySelector('input[type=file]').files[0];
+          var reader  = new FileReader();
+
+          reader.onloadend = function () {
+            preview.src = reader.result;
+          }
+
+          if (file) {
+            reader.readAsDataURL(file);
+          } else {
+            preview.src = "";
+          }
+    }
+    $("#id_image").on("change", function() {
+         thumbnail();
+    });
+</script>
+</html>
